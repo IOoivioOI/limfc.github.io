@@ -316,12 +316,11 @@
             <p>打个模拟赛，自认为写了$O(mn)$的很稳，但事实上是$O(mn^2)$，才发现自己不会主定理，就记录在这儿好了</p>
 <p>先把主定理抄在这里：</p>
 <p>$a\ge 1,b&gt;1$是常数，$f(n)$是一个函数，$T(n)$是定义在非负整数上的递归式：</p>
-<p>$$T(n)=aT(\frac{n}{b})+f(n)$$</p>
-<p>其中我们将$\frac{n}{b}$解释为$\lfloor \frac{n}{b} \rfloor$或$\lceil \frac{n}{b} \rceil$。那么$T(n)$有如下渐进界：</p>
+<script type="math/tex; mode=display">T(n)=aT(\frac{n}{b})+f(n)</script><p>其中我们将$\frac{n}{b}$解释为$\lfloor \frac{n}{b} \rfloor$或$\lceil \frac{n}{b} \rceil$。那么$T(n)$有如下渐进界：</p>
 <ol>
-<li><p>若对于某个常数$\varepsilon&gt;0$有$f(n)=O(n^{log<em>{b}a-\varepsilon})$,则$T(n)=\Theta (n^{log</em>{b}a}) $.</p>
+<li><p>若对于某个常数$\varepsilon&gt;0$有$f(n)=O(n^{log_{b}a-\varepsilon})$,则$T(n)=\Theta (n^{log_{b}a}) $.</p>
 </li>
-<li><p>若$f(n)=\Theta(n^{log<em>{b}a} )$,则$T(n)=\Theta(n^{log</em>{b}a}lgn )$.</p>
+<li><p>若$f(n)=\Theta(n^{log_{b}a} )$,则$T(n)=\Theta(n^{log_{b}a}lgn )$.</p>
 </li>
 <li><p>若对于某个常数$\varepsilon&gt;0$有，$f(n)=\Omega (n^{log_{b}a-\varepsilon} )$,且对于某个常数$c&lt;1$和足够大的$n$有$af(\frac{n}{b})\leq cf(n)$,则$T(n)=\Theta(f(n))$.</p>
 </li>
