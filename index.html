@@ -80,11 +80,11 @@
 
 
 <meta property="og:type" content="website">
-<meta property="og:title" content="OIER">
+<meta property="og:title" content="Cruel World">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="OIER">
+<meta property="og:site_name" content="Cruel World">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="OIER">
+<meta name="twitter:title" content="Cruel World">
 
 
 
@@ -134,7 +134,7 @@
 
 
 
-  <title>OIER</title>
+  <title>Cruel World</title>
   
 
 
@@ -165,7 +165,7 @@
     <div class="custom-logo-site-title">
       <a href="/"  class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">OIER</span>
+        <span class="site-title">Cruel World</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
@@ -242,6 +242,139 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/主定理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="flukehn">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Cruel World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2017/11/01/主定理/" itemprop="url">主定理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Veröffentlicht am</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-11-01T11:39:43+08:00">
+                2017-11-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>打个模拟赛，自认为写了$O(mn)$的很稳，但事实上是$O(mn^2)$，才发现自己不会主定理，就记录在这儿好了</p>
+<p>先把主定理抄在这里：</p>
+<p>$a\ge 1,b&gt;1$是常数，$f(n)$是一个函数，$T(n)$是定义在非负整数上的递归式：</p>
+<p>$$T(n)=aT(\frac{n}{b})+f(n)$$</p>
+<p>其中我们将$\frac{n}{b}$解释为$\lfloor \frac{n}{b} \rfloor$或$\lceil \frac{n}{b} \rceil$。那么$T(n)$有如下渐进界：</p>
+<ol>
+<li><p>若对于某个常数$\varepsilon&gt;0$有$f(n)=O(n^{log<em>{b}a-\varepsilon})$,则$T(n)=\Theta (n^{log</em>{b}a}) $.</p>
+</li>
+<li><p>若$f(n)=\Theta(n^{log<em>{b}a} )$,则$T(n)=\Theta(n^{log</em>{b}a}lgn )$.</p>
+</li>
+<li><p>若对于某个常数$\varepsilon&gt;0$有，$f(n)=\Omega (n^{log_{b}a-\varepsilon} )$,且对于某个常数$c&lt;1$和足够大的$n$有$af(\frac{n}{b})\leq cf(n)$,则$T(n)=\Theta(f(n))$.</p>
+</li>
+</ol>
+<p>然后我很傻逼的这么写的</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">solve</span><span class="params">(<span class="keyword">int</span> l,<span class="keyword">int</span> r,<span class="keyword">int</span> ql,<span class="keyword">int</span> qr,<span class="keyword">int</span> v)</span></span>&#123;</div><div class="line">    <span class="keyword">if</span>(ql&gt;qr)<span class="keyword">return</span>;</div><div class="line">    <span class="keyword">if</span>(ql==qr) &#123;</div><div class="line">        p[ql] = (p[ql] + <span class="number">1L</span>L*(r-l+<span class="number">1</span>)*(n-v<span class="number">-1</span>)%MOD*(n-v<span class="number">-1</span>))%MOD;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        <span class="keyword">int</span> mid=l+r&gt;&gt;<span class="number">1</span>;</div><div class="line">        <span class="keyword">int</span> t=upper_bound(a+<span class="number">1</span>,a+n+<span class="number">1</span>,mid)-a;</div><div class="line">        solve(l,mid,ql,t<span class="number">-1</span>,v+qr-t+<span class="number">1</span>),solve(mid+<span class="number">1</span>,r,t,qr,v);</div><div class="line">        solve(l,mid,ql,t<span class="number">-1</span>,v),solve(mid+<span class="number">1</span>,r,t,qr,v+t-ql);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/11/01/cf-edu-31/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -251,7 +384,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OIER">
+      <meta itemprop="name" content="Cruel World">
     </span>
 
     
@@ -376,7 +509,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="OIER">
+      <meta itemprop="name" content="Cruel World">
     </span>
 
     
@@ -521,7 +654,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">3</span>
                   <span class="site-state-item-name">Artikel</span>
                 </a>
               </div>
